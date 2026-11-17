@@ -34,7 +34,7 @@ export default function AboutSection() {
           ))}
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <ButtonLink href="#experience">View Experience</ButtonLink>
+            <ButtonLink href="#professional-experience">View Experience</ButtonLink>
             <ButtonLink href="#portfolio" variant="outline">
               View Projects
             </ButtonLink>

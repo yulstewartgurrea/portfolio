@@ -22,9 +22,8 @@ body {
   background: #ffffff;
 }
 
-/* Keep section titles from hiding behind the sticky header when jumping to a section */
-section,
-li[id] {
+/* Keep titles from hiding behind the sticky header when a link jumps to them */
+[id] {
   scroll-margin-top: 80px;
 }
 

@@ -2,9 +2,10 @@
 // "use client" is needed because the filter buttons use state.
 
 import { useState } from "react";
+import Image from "next/image";
 import { projects } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
-import { ArrowUpRightIcon, iconsByName } from "./Icons";
+import { ArrowUpRightIcon } from "./Icons";
 
 // Build the filter list from the categories used in the data,
 // e.g. ["All", "AI Engineering", "Financial Automation", "Web Development"].
@@ -19,12 +20,12 @@ export default function PortfolioSection() {
       : projects.filter((project) => project.category === selectedCategory);
 
   return (
+    // The id stays "portfolio" so the "Portfolio" link in the navigation still works.
     <section id="portfolio" className="bg-soft py-24">
       <div className="mx-auto max-w-6xl px-6">
         <SectionHeading
-          eyebrow="Portfolio"
-          title="Selected projects"
-          subtitle="A look at my work in AI, financial automation, and web development."
+          title="Portfolio"
+          subtitle="Applications and systems I’ve built across AI, backend engineering, and web development."
           centered
         />
 
@@ -47,35 +48,47 @@ export default function PortfolioSection() {
         </div>
 
         {/* Project cards */}
-        <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {visibleProjects.map((project) => {
-            const ProjectIcon = iconsByName[project.icon];
-
             // Number based on the project's position in the full list: "01", "02", ...
             const number = String(projects.indexOf(project) + 1).padStart(2, "0");
 
             return (
-              <article key={project.id} className="overflow-hidden rounded-3xl border border-line bg-white shadow-sm">
-                {/* Top: light blue area with rings pattern and the icon */}
-                <div className="rings-pattern relative flex h-44 items-center justify-center border-b border-line bg-primary-soft">
-                  <p className="absolute left-5 top-4 text-xs font-bold uppercase tracking-widest text-primary">
-                    {number} / Project
+              <article
+                key={project.id}
+                className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:shadow-md"
+              >
+                {/* Screenshot or diagram: only shown when the project has an image.
+                    Confidential projects stay as compact text-only cards. */}
+                {project.image && (
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    width={1200}
+                    height={750}
+                    className="aspect-[16/10] w-full border-b border-line object-cover"
+                  />
+                )}
+
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="text-xs font-bold uppercase tracking-widest text-primary">
+                    {number} · {project.category}
                   </p>
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-primary shadow-sm">
-                    <ProjectIcon className="h-8 w-8" />
+                  <h3 className="mt-3 text-xl font-bold text-ink">{project.title}</h3>
+                  <p className="mt-2 flex-1 leading-relaxed text-muted">{project.description}</p>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="rounded-full bg-soft px-3 py-1 text-xs font-medium text-ink">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                </div>
 
-                {/* Bottom: text */}
-                <div className="p-6">
-                  <p className="text-sm text-muted">{project.tags.join(" · ")}</p>
-                  <h3 className="mt-2 text-2xl font-bold text-ink">{project.title}</h3>
-                  <p className="mt-2 text-muted">{project.description}</p>
-
-                  {/* Jumps to this project's entry in the "Project milestones" timeline */}
+                  {/* Jumps to the entry with the same id in the "Professional experience" timeline */}
                   <a
                     href={`#${project.id}`}
-                    className="mt-4 inline-flex items-center gap-1 font-semibold text-primary hover:underline"
+                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
                   >
                     View project
                     <ArrowUpRightIcon className="h-4 w-4" />

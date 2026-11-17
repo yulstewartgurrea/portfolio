@@ -9,7 +9,7 @@ const figtree = Figtree({ variable: "--font-figtree", subsets: ["latin"] });
 // Text shown in the browser tab and in search results.
 export const metadata: Metadata = {
   title: `${profile.shortName} | ${profile.title}`,
-  description: `${profile.fullName}: senior software engineer building AI-powered software, full-stack applications, and financial workflow automation.`,
+  description: `${profile.fullName}: software engineer building AI-powered software, full-stack applications, and financial workflow automation.`,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

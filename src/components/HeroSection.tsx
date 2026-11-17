@@ -17,9 +17,9 @@ export default function HeroSection() {
             {profile.fullName}
           </p>
 
-          <h1 className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight text-ink md:text-7xl">
-            {hero.headline}
-            <br />
+          {/* Font sizes step down on phones and mid-size laptops so "Software Engineer" fits on one line */}
+          <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl md:text-7xl lg:text-6xl xl:text-7xl">
+            {hero.headline}{" "}
             <span className="text-primary">{hero.highlightedWord}</span>
           </h1>
 

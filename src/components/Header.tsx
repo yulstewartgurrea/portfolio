@@ -10,7 +10,7 @@ import { CloseIcon, GitHubIcon, LinkedInIcon, MenuIcon } from "./Icons";
 const NAV_LINKS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "services", label: "Services" },
+  { id: "professional-experience", label: "Career" },
   { id: "portfolio", label: "Portfolio" },
   { id: "contact", label: "Contact" },
 ];

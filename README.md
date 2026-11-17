@@ -15,7 +15,7 @@ Open http://localhost:3000
 
 | What you want to change                         | File                                     |
 | ----------------------------------------------- | ---------------------------------------- |
-| All text, links, services, projects             | `src/data/portfolio.ts`                  |
+| All text, links, projects, work history          | `src/data/portfolio.ts`                  |
 | Colors and font                                 | `src/app/globals.css`, `src/app/layout.tsx` |
 | Order of sections on the page                   | `src/app/page.tsx`                       |
 | Top navigation bar                              | `src/components/Header.tsx`              |
@@ -26,9 +26,12 @@ Open http://localhost:3000
 ## Adding a project
 
 Add an entry to the `projects` list in `src/data/portfolio.ts`.
-It automatically shows up in both "Selected projects" and "Project milestones".
+To make its "View project" link jump to the matching job in "Professional experience",
+give that job (or engagement) in the `experiences` list the same `id`.
 A new `category` value automatically becomes a new filter button.
-For `icon`, pick one of the names at the bottom of `src/components/Icons.tsx`.
+To show a screenshot or workflow diagram, put the image in `public/images/projects/`
+and set `image: "/images/projects/your-file.png"` (16:10 works best).
+Leave `image` out for confidential work and the card stays text-only.
 
 ## Deploy
 
