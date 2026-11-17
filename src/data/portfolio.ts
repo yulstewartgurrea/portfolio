@@ -7,7 +7,7 @@
 // ---------- Types (describe the shape of the data) ----------
 
 export type Project = {
-  id: string; // "View project" jumps to the experience entry with the same id
+  id: string; // If an experience entry has the same id, "View project" jumps to it
   title: string;
   category: string; // Used by the filter buttons in the Portfolio section
   image?: string; // Optional: screenshot or workflow diagram, e.g. "/images/projects/ecl.png"
@@ -73,43 +73,47 @@ export const about = {
   ],
 };
 
-// ---------- Projects ("Selected projects" section) ----------
+// ---------- Projects (Portfolio section) ----------
 
 export const projects: Project[] = [
   {
     id: "ai-document-analysis",
-    title: "AI Document Analysis",
+    title: "RAG Document Analysis",
     category: "AI Engineering",
-    tags: ["AI", "Document processing"],
-    description: "AI-assisted document review and verification.",
+    tags: ["LangChain", "LLM APIs", "RAG"],
+    description:
+      "Retrieval-augmented AI workflows for website retrieval, document comparison, and conversational Q&A, with 95% accuracy in finding discrepancies across documents.",
+  },
+  {
+    id: "agentic-ai-platform",
+    title: "Agentic AI Platform",
+    category: "AI Engineering",
+    tags: ["FastAPI", "LangGraph", "Next.js", "pgvector"],
+    description:
+      "Full-stack agentic AI platform that automates PFRS 9 / IFRS 9 ECL computations while keeping the financial calculations deterministic and auditable.",
   },
   {
     id: "ecl-automation",
     title: "ECL Automation",
     category: "Financial Automation",
-    tags: ["Python", "Financial automation"],
-    description: "Automated expected credit loss calculations and reporting.",
+    tags: ["Python", "IFRS 9", "Financial automation"],
+    description:
+      "IFRS 9-aligned analytics that process loan portfolios, apply statistical and macroeconomic models, and produce audit-ready expected credit loss reports.",
   },
+  // TODO: replace the placeholder description and tags below with the real details.
   {
-    id: "risk-capital-stress-testing",
-    title: "Risk & Capital Stress Testing",
-    category: "Financial Automation",
-    tags: ["Python", "Django", "Pandas"],
-    description: "Scenario modeling for financial risk teams.",
-  },
-  {
-    id: "aml-name-matching",
-    title: "AML Name Matching",
-    category: "AI Engineering",
-    tags: ["Python", "AI"],
-    description: "Name screening and match evaluation.",
-  },
-  {
-    id: "elated",
-    title: "Elated",
+    id: "booking-app",
+    title: "Booking App",
     category: "Web Development",
-    tags: ["Django", "PostGIS", "AWS"],
-    description: "Backend engineering for a matching app.",
+    tags: ["Web app"],
+    description: "Booking and scheduling application.",
+  },
+  {
+    id: "messaging-platform",
+    title: "Messaging Platform",
+    category: "Web Development",
+    tags: ["Real-time"],
+    description: "Real-time messaging platform.",
   },
 ];
 
@@ -125,6 +129,7 @@ export const experiences: Job[] = [
     note: "Selected engagements are anonymized to protect client and internal project confidentiality.",
     engagements: [
       {
+        id: "agentic-ai-platform",
         name: "Agentic AI Platform | Financial Services",
         role: "Contributor",
         period: "Mar 2026 - Present",

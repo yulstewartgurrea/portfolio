@@ -28,6 +28,7 @@ Open http://localhost:3000
 Add an entry to the `projects` list in `src/data/portfolio.ts`.
 To make its "View project" link jump to the matching job in "Professional experience",
 give that job (or engagement) in the `experiences` list the same `id`.
+Without a matching `id`, the card simply has no "View project" link.
 A new `category` value automatically becomes a new filter button.
 To show a screenshot or workflow diagram, put the image in `public/images/projects/`
 and set `image: "/images/projects/your-file.png"` (16:10 works best).

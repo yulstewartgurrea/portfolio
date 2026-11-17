@@ -3,13 +3,23 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { projects } from "@/data/portfolio";
+import { experiences, projects } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
 import { ArrowUpRightIcon } from "./Icons";
 
 // Build the filter list from the categories used in the data,
 // e.g. ["All", "AI Engineering", "Financial Automation", "Web Development"].
 const categories = ["All", ...new Set(projects.map((project) => project.category))];
+
+// Every id used in the "Professional experience" timeline (jobs and their engagements).
+// A card only shows "View project" when its id is in this list.
+const timelineIds: string[] = [];
+for (const job of experiences) {
+  if (job.id) timelineIds.push(job.id);
+  for (const engagement of job.engagements ?? []) {
+    if (engagement.id) timelineIds.push(engagement.id);
+  }
+}
 
 export default function PortfolioSection() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -86,13 +96,15 @@ export default function PortfolioSection() {
                   </div>
 
                   {/* Jumps to the entry with the same id in the "Professional experience" timeline */}
-                  <a
-                    href={`#${project.id}`}
-                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
-                  >
-                    View project
-                    <ArrowUpRightIcon className="h-4 w-4" />
-                  </a>
+                  {timelineIds.includes(project.id) && (
+                    <a
+                      href={`#${project.id}`}
+                      className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                    >
+                      View project
+                      <ArrowUpRightIcon className="h-4 w-4" />
+                    </a>
+                  )}
                 </div>
               </article>
             );
