@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Site colors and font.
+  Each value here becomes a Tailwind class, for example:
+    --color-primary  ->  bg-primary, text-primary, border-primary
+  Change a color here and it updates everywhere.
+*/
+@theme {
+  --color-primary: #1849c9; /* Main blue: buttons, links, highlights */
+  --color-primary-dark: #123aa3; /* Darker blue for button hover */
+  --color-primary-soft: #eaf1fe; /* Very light blue backgrounds */
+  --color-ink: #0f1b3d; /* Headings and main text (dark navy) */
+  --color-muted: #4b5568; /* Secondary text (gray) */
+  --color-line: #dfe5f1; /* Borders */
+  --color-soft: #f6f8fc; /* Light gray section backgrounds */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-figtree), sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+}
+
+/* Keep section titles from hiding behind the sticky header when jumping to a section */
+section,
+li[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Concentric rings behind the icon on each project card */
+.rings-pattern {
+  background-image: repeating-radial-gradient(
+    circle at center,
+    transparent 0 34px,
+    rgb(24 73 201 / 0.07) 35px 36px
+  );
 }
