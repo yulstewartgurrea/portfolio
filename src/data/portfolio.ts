@@ -11,6 +11,8 @@ export type Project = {
   title: string;
   category: string; // Used by the filter buttons in the Portfolio section
   image?: string; // Optional: screenshot or workflow diagram, e.g. "/images/projects/ecl.png"
+  githubUrl?: string; // Optional: shows a "GitHub" link on the card
+  liveUrl?: string; // Optional: "View project" opens this site instead of jumping to the timeline
   tags: string[];
   description: string;
 };
@@ -96,6 +98,9 @@ export const projects: Project[] = [
     id: "ecl-automation",
     title: "ECL Automation",
     category: "Financial Automation",
+    image: "/images/ecl.png",
+    githubUrl: "https://github.com/yulstewartgurrea/ecl",
+    liveUrl: "https://yulgurrea-ecl.vercel.app/workflows",
     tags: ["Python", "IFRS 9", "Financial automation"],
     description:
       "IFRS 9-aligned analytics that process loan portfolios, apply statistical and macroeconomic models, and produce audit-ready expected credit loss reports.",

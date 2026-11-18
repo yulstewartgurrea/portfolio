@@ -14,6 +14,7 @@
   --color-muted: #4b5568; /* Secondary text (gray) */
   --color-line: #dfe5f1; /* Borders */
   --color-soft: #f6f8fc; /* Light gray section backgrounds */
+  --color-navy: #1a3270; /* Background behind project card illustrations */
 
   --font-sans: var(--font-figtree), sans-serif;
 }

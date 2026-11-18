@@ -5,7 +5,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { experiences, projects } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
-import { ArrowUpRightIcon } from "./Icons";
+import { ArrowUpRightIcon, GitHubIcon } from "./Icons";
+import ProjectIllustration from "./ProjectIllustration";
 
 // Build the filter list from the categories used in the data,
 // e.g. ["All", "AI Engineering", "Financial Automation", "Web Development"].
@@ -59,56 +60,63 @@ export default function PortfolioSection() {
 
         {/* Project cards */}
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {visibleProjects.map((project) => {
-            // Number based on the project's position in the full list: "01", "02", ...
-            const number = String(projects.indexOf(project) + 1).padStart(2, "0");
+          {visibleProjects.map((project) => (
+            <article
+              key={project.id}
+              className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:shadow-md"
+            >
+              {/* Screenshot if the project has one, otherwise a simple drawing */}
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={`${project.title} screenshot`}
+                  width={1200}
+                  height={675}
+                  className="aspect-[16/9] w-full border-b border-line object-cover object-top"
+                />
+              ) : (
+                <ProjectIllustration id={project.id} />
+              )}
 
-            return (
-              <article
-                key={project.id}
-                className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:shadow-md"
-              >
-                {/* Screenshot or diagram: only shown when the project has an image.
-                    Confidential projects stay as compact text-only cards. */}
-                {project.image && (
-                  <Image
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    width={1200}
-                    height={750}
-                    className="aspect-[16/10] w-full border-b border-line object-cover"
-                  />
-                )}
+              <div className="flex flex-1 flex-col p-6">
+                <p className="text-xs font-bold uppercase tracking-widest text-primary">{project.category}</p>
+                <h3 className="mt-2 text-2xl font-bold text-ink">{project.title}</h3>
+                <p className="mt-2 flex-1 leading-relaxed text-muted">{project.description}</p>
 
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="text-xs font-bold uppercase tracking-widest text-primary">
-                    {number} · {project.category}
-                  </p>
-                  <h3 className="mt-3 text-xl font-bold text-ink">{project.title}</h3>
-                  <p className="mt-2 flex-1 leading-relaxed text-muted">{project.description}</p>
+                {/* Footer: GitHub on the left, "View project" on the right.
+                    Hidden when the project has neither link. */}
+                {(project.githubUrl || project.liveUrl || timelineIds.includes(project.id)) && (
+                  <div className="mt-6 flex items-center border-t border-line pt-4">
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-primary"
+                      >
+                        <GitHubIcon className="h-4 w-4" />
+                        GitHub
+                      </a>
+                    )}
 
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="rounded-full bg-soft px-3 py-1 text-xs font-medium text-ink">
-                        {tag}
-                      </span>
-                    ))}
+                    {/* Opens the live site in a new tab if there is one,
+                        otherwise jumps to the entry with the same id in the "Professional experience" timeline */}
+                    {(project.liveUrl || timelineIds.includes(project.id)) && (
+                      <a
+                        href={project.liveUrl ?? `#${project.id}`}
+                        target={project.liveUrl ? "_blank" : undefined}
+                        rel={project.liveUrl ? "noopener noreferrer" : undefined}
+                        className="ml-auto inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                      >
+                        View project
+                        <ArrowUpRightIcon className="h-4 w-4" />
+                      </a>
+                    )}
                   </div>
-
-                  {/* Jumps to the entry with the same id in the "Professional experience" timeline */}
-                  {timelineIds.includes(project.id) && (
-                    <a
-                      href={`#${project.id}`}
-                      className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
-                    >
-                      View project
-                      <ArrowUpRightIcon className="h-4 w-4" />
-                    </a>
-                  )}
-                </div>
-              </article>
-            );
-          })}
+                )}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
